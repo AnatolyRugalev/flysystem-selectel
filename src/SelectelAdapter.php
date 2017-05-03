@@ -44,6 +44,16 @@ class SelectelAdapter implements AdapterInterface
     }
 
     /**
+     * Returns container instance
+     *
+     * @return ContainerContract
+     */
+    public function container()
+    {
+        return $this->container;
+    }
+
+    /**
      * Transforms internal files array to Flysystem-compatible one.
      *
      * @param array $files Original Selectel's files array.
@@ -173,8 +183,8 @@ class SelectelAdapter implements AdapterInterface
     /**
      * Writes string or stream to container.
      *
-     * @param string          $type    Upload type
-     * @param string          $path    File path
+     * @param string $type Upload type
+     * @param string $path File path
      * @param string|resource $payload String content or Stream resource
      *
      * @return array|bool
@@ -182,7 +192,7 @@ class SelectelAdapter implements AdapterInterface
     protected function writeToContainer($type, $path, $payload)
     {
         try {
-            $this->container->{'uploadFrom'.$type}($path, $payload);
+            $this->container->{'uploadFrom' . $type}($path, $payload);
         } catch (UploadFailedException $e) {
             return false;
         }
